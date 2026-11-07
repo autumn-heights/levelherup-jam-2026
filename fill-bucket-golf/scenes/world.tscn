@@ -10,8 +10,7 @@ size = Vector2(600, 20)
 script = ExtResource("1_rwgxs")
 
 [node name="Thrower" parent="." unique_id=4659465 instance=ExtResource("1_nnsk1")]
-visible = true
-position = Vector2(20, 300)
+position = Vector2(20, 321)
 
 [node name="Borders" type="Node2D" parent="." unique_id=2140081404]
 
@@ -43,24 +42,45 @@ rotation = 1.5707964
 position = Vector2(303, 0)
 shape = SubResource("RectangleShape2D_drnfr")
 
-[node name="WaitTimer" type="Timer" parent="." unique_id=1118882029]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1466140396]
 
-[node name="WaitTimerLabel" type="Label" parent="WaitTimer" unique_id=601093346]
-offset_left = 485.0
-offset_top = 23.0
-offset_right = 560.0
-offset_bottom = 60.0
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=1195925456]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -20.0
+offset_right = 45.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="PucksCounter" type="Label" parent="." unique_id=1141681282]
-offset_left = 513.0
-offset_top = 66.0
-offset_right = 553.0
-offset_bottom = 89.0
-
-[node name="GameEndLabel" type="Label" parent="." unique_id=486701100]
+[node name="GameEndLabel" type="Label" parent="CanvasLayer/CenterContainer" unique_id=486701100]
 visible = false
-offset_left = 151.0
-offset_top = 137.0
-offset_right = 517.0
-offset_bottom = 294.0
+layout_mode = 2
 text = "game end :)"
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer" unique_id=1724431493]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -96.0
+offset_bottom = 103.0
+grow_horizontal = 0
+size_flags_horizontal = 10
+size_flags_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="PucksCounter" type="Label" parent="CanvasLayer/GridContainer" unique_id=1141681282]
+layout_mode = 2
+
+[node name="WaitTimerLabel" type="Label" parent="CanvasLayer/GridContainer" unique_id=601093346]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="WaitTimer" type="Timer" parent="CanvasLayer/GridContainer/WaitTimerLabel" unique_id=1118882029]
+one_shot = true
