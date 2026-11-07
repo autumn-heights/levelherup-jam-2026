@@ -85,4 +85,3 @@ offset_right = 66.0
 offset_bottom = 535.0
 
 [node name="LevelGrid" parent="." unique_id=742980925 instance=ExtResource("2_4wyf3")]
-visible = false

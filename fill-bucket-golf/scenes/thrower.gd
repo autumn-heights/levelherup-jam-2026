@@ -37,12 +37,7 @@ func _input(event):
 	# Mouse in viewport coordinates.
 	if event is InputEventMouseMotion:
 		look_at(event.global_position)
-		if current_state == ControlState.STATE_READY:
-			
-			current_angle = rotation;
-			
-			
-		elif current_state == ControlState.STATE_SETPOWER:
+		if current_state == ControlState.STATE_READY || current_state == ControlState.STATE_SETPOWER:
 			
 			current_angle = rotation;
 			
