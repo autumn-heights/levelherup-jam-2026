@@ -11,5 +11,5 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	linear_velocity *= (1-puck_friction);
+	#linear_velocity *= (1-puck_friction);
 	pass

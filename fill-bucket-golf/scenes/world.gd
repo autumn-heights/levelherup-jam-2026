@@ -43,6 +43,7 @@ func shoot_puck(angle, strength):
 	print("shooting a puck.. with angle: ", angle, " and strength ", strength)
 	
 	# apply a physics impulse to the puck
+	current_puck.freeze = 0;
 	current_puck.apply_impulse(Vector2.RIGHT.rotated(angle).normalized() * strength)
 	
 	# if it was the last puck, wait for them all to finish timer
@@ -65,6 +66,7 @@ func create_puck():
 		current_puck = scene_puck.instantiate();
 		add_child(current_puck)
 		current_puck.position = Vector2i(100,100);
+		current_puck.freeze = 1;
 		thrower.ready_up()
 		all_pucks.append(current_puck);
 		thrower.position = current_puck.position;
