@@ -4,6 +4,10 @@ const MIN_MOUSE_DIST = 2;
 const MAX_MOUSE_DIST = 500;
 const BAR_OFFSET = 2;
 
+@export var MIN_FORCE = 30;
+@export var MAX_FORCE = 400
+
+
 var current_angle = 0;
 var current_power = 0;
 
@@ -68,7 +72,7 @@ func _input(event):
 			match current_state:
 				ControlState.STATE_SETPOWER:
 					## this is the correct state to recieve this input !! well done
-					shoot_puck.emit(current_angle, current_power)
+					shoot_puck.emit(current_angle, get_scaled_power())
 					current_state = ControlState.STATE_PLAYERWAIT;
 					$MeterSprite.hide();
 					pass
@@ -87,7 +91,8 @@ func trigger_launch(angle, power):
 func ready_up():
 	current_state = ControlState.STATE_READY;
 	$MeterSprite.show();
-
+func get_scaled_power():
+	return remap(current_power, MIN_MOUSE_DIST, MAX_MOUSE_DIST, MIN_FORCE, MAX_FORCE)
 func report_state_mismatch():
 	printerr("this buttonpress should not be recieved in the state ", state_to_str())
 func state_to_str():
