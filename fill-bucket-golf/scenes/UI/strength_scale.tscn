@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cp2gnglhri3e3"]
+
+[ext_resource type="Texture2D" uid="uid://d4a3hc25ptkbq" path="res://ART/Power Scale.png" id="1_a4mep"]
+[ext_resource type="Script" uid="uid://dl0gkfhys1qjn" path="res://scenes/UI/strength_scale.gd" id="2_58ooy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58ooy"]
+atlas = ExtResource("1_a4mep")
+region = Rect2(0, 384, 128, 128)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_aud6r"]
+load_path = "res://.godot/imported/Power Scale.png-9c433cd04a579e4f5deb9c634774f014.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjs0l"]
+atlas = SubResource("CompressedTexture2D_aud6r")
+region = Rect2(0, 256, 128, 128)
+
+[node name="StrengthScale" type="TextureProgressBar" unique_id=259121115]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_over = SubResource("AtlasTexture_58ooy")
+texture_progress = SubResource("AtlasTexture_fjs0l")
+script = ExtResource("2_58ooy")

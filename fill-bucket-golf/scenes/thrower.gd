@@ -8,7 +8,8 @@ var current_angle = 0;
 var current_power = 0;
 
 var mouse_click_position = Vector2(0,0);
-signal shooting_puck(angle, power)
+signal shoot_puck(angle, power)
+signal create_puck_request
 
 enum ControlState {
 	STATE_READY,
@@ -22,7 +23,7 @@ var current_state = ControlState.STATE_READY;
 func _ready() -> void:
 	print("Starting!")
 	pass # Replace with function body.
-
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -44,13 +45,18 @@ func _input(event):
 			current_power = (Vector2(0,0) - event.position).length();
 			current_power = clamp(current_power, MIN_MOUSE_DIST, MAX_MOUSE_DIST);
 			
-			$MeterSprite.scale.x = max(1, current_power - BAR_OFFSET);
+			$MeterSprite.scale.x = max(1, current_power - BAR_OFFSET*2);
 			$MeterSprite.position.x = 0.5 * current_power + BAR_OFFSET;
 			
 
 
 
 	if event is InputEventMouseButton:
+		if event.is_action_pressed("Left_Click"):
+			pass
+		elif event.is_action_released("Left_Click"):
+			pass
+			
 		print("Mouse Click/Unclick at: ", event.position)
 		rotation += 10;
 		
@@ -62,8 +68,7 @@ func _input(event):
 		elif current_state == ControlState.STATE_SETPOWER:
 			
 			# trigger_launch ( current_angle, current_power )
-			
-			mouse_click_position = Vector2(0,0);
+			trigger_launch(current_angle, current_power)
 			
 			current_state = ControlState.STATE_PLAYERWAIT;
 			
@@ -72,4 +77,4 @@ func _input(event):
 			current_state = ControlState.STATE_READY;
 
 func trigger_launch(angle, power):
-	shooting_puck.emit(angle, power)
+	shoot_puck.emit(angle, power)

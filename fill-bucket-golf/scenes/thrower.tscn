@@ -8,6 +8,7 @@ atlas = ExtResource("2_ca04e")
 region = Rect2(5, 5, 1, 1)
 
 [node name="Thrower" type="Node2D" unique_id=4659465]
+visible = false
 script = ExtResource("1_ca04e")
 
 [node name="MeterSprite" type="Sprite2D" parent="." unique_id=11861033]
