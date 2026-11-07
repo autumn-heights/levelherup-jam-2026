@@ -21,6 +21,8 @@ enum ControlState {
 }
 
 var current_state = ControlState.STATE_READY;
+@onready var power_sprite: TextureProgressBar = $TextureProgressBar2
+@onready var gradient_power_sprite: TextureProgressBar = $TextureProgressBar2/GradientTextureProgressBar
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -44,9 +46,12 @@ func _input(event):
 			current_power = 0;
 			current_power = event.global_position.distance_to(global_position);
 			current_power = clamp(current_power, MIN_MOUSE_DIST, MAX_MOUSE_DIST);
-			
-			$MeterSprite.scale.x = max(1, current_power*0.5 - (BAR_OFFSET * 2));
-			$MeterSprite.position.x = (0.5*$MeterSprite.scale.x) + BAR_OFFSET;
+			var v = current_power/ MAX_MOUSE_DIST
+			power_sprite.value = v
+			gradient_power_sprite.value = v
+			#gradient_power_sprite.size.x = 256 * v
+			#$MeterSprite.scale.x = max(1, current_power*0.5 - (BAR_OFFSET * 2));
+			#$MeterSprite.position.x = (0.5*$MeterSprite.scale.x) + BAR_OFFSET;
 			
 			
 	if event is InputEventMouseButton:
@@ -68,7 +73,7 @@ func _input(event):
 					## this is the correct state to recieve this input !! well done
 					shoot_puck.emit(current_angle, get_scaled_power())
 					current_state = ControlState.STATE_PLAYERWAIT;
-					$MeterSprite.hide();
+					power_sprite.hide();
 					pass
 				ControlState.STATE_READY:
 					report_state_mismatch()
@@ -84,7 +89,7 @@ func trigger_launch(angle, power):
 	
 func ready_up():
 	current_state = ControlState.STATE_READY;
-	$MeterSprite.show();
+	power_sprite.show();
 func get_scaled_power():
 	return remap(current_power, MIN_MOUSE_DIST, MAX_MOUSE_DIST, MIN_FORCE, MAX_FORCE)
 func report_state_mismatch():
