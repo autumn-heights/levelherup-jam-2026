@@ -21,8 +21,21 @@ func _input(event):
 	# Mouse in viewport coordinates.
 	if event is InputEventMouseButton:
 		print("Mouse Click/Unclick at: ", event.position)
+		rotation += 10;
+		position += Vector2(10,10)
 		
-		if current_state = ControlState.STATE_READY:
+		if current_state == ControlState.STATE_READY:
+			
+			current_state = ControlState.STATE_SETPOWER;
+			
+		elif current_state == ControlState.STATE_SETPOWER:
+			
+			current_state = ControlState.STATE_PLAYERWAIT;
+			
+		elif current_state == ControlState.STATE_PLAYERWAIT:
+			
+			current_state = ControlState.STATE_READY;
+			
 		
 		
 	elif event is InputEventMouseMotion:
@@ -30,4 +43,4 @@ func _input(event):
 		#print("Mouse Motion at: ", event.position)
 
 	# Print the size of the viewport.
-	print("Viewport Resolution is: ", get_viewport().get_visible_rect().size)
+	#print("Viewport Resolution is: ", get_viewport().get_visible_rect().size)
