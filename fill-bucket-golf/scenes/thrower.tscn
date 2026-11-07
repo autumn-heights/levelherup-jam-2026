@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dk07oynjb2ec6"]
+
+[ext_resource type="Script" uid="uid://cp74c8fxn8ynt" path="res://scenes/thrower.gd" id="1_ca04e"]
+[ext_resource type="Texture2D" uid="uid://brupcqgy6kamt" path="res://ball-export.png" id="1_muk2e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7q0l"]
+atlas = ExtResource("1_muk2e")
+region = Rect2(5, 5, 1, 1)
+
+[node name="Thrower" type="Node2D" unique_id=4659465]
+script = ExtResource("1_ca04e")
+
+[node name="MeterSprite" type="Sprite2D" parent="." unique_id=11861033]
+position = Vector2(2, 0)
+texture = SubResource("AtlasTexture_h7q0l")
