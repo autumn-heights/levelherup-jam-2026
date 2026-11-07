@@ -1,8 +1,8 @@
 extends Node2D
 
-const MIN_MOUSE_DIST = 32;
-const MAX_MOUSE_DIST = 1000;
-const BAR_OFFSET = 32;
+const MIN_MOUSE_DIST = 12;
+const MAX_MOUSE_DIST = 400;
+const BAR_OFFSET = 12;
 
 var current_angle = 0;
 var current_power = 0;
@@ -45,8 +45,8 @@ func _input(event):
 			current_power = (Vector2(0,0) - event.position).length();
 			current_power = clamp(current_power, MIN_MOUSE_DIST, MAX_MOUSE_DIST);
 			
-			$MeterSprite.scale.x = max(1, current_power - BAR_OFFSET*2);
-			$MeterSprite.position.x = 0.5 * current_power + BAR_OFFSET;
+			$MeterSprite.scale.x = max(1, current_power*0.5 - (BAR_OFFSET * 2));
+			$MeterSprite.position.x = (0.5*$MeterSprite.scale.x) + BAR_OFFSET;
 			
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("Left_Click"):
