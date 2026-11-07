@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://cxwry3wfpwcdb"]
+
+[ext_resource type="Script" uid="uid://owd2r7v8eeoy" path="res://scenes/UI/canvas_layer.gd" id="1_13lb3"]
+
+[node name="UILayer" type="CanvasLayer" unique_id=2034971586]
+script = ExtResource("1_13lb3")
+
+[node name="GameEnd" type="PanelContainer" parent="." unique_id=1932011745]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameEndLabel" type="Label" parent="GameEnd" unique_id=2121310329]
+visible = false
+layout_mode = 2
+text = "game end :)"
+
+[node name="InfoContainer" type="PanelContainer" parent="." unique_id=1527373170]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 77.0
+grow_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="InfoContainer" unique_id=1247446129]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="InfoContainer/VBoxContainer" unique_id=1004598225]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="InfoContainer/VBoxContainer" unique_id=1427175690]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="PucksCounter" type="Label" parent="InfoContainer/VBoxContainer/GridContainer" unique_id=2126316771]
+layout_mode = 2
+
+[node name="WaitTimerLabel" type="Label" parent="InfoContainer/VBoxContainer/GridContainer" unique_id=145469132]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="WaitTimer" type="Timer" parent="InfoContainer/VBoxContainer/GridContainer/WaitTimerLabel" unique_id=1997438668]
+one_shot = true

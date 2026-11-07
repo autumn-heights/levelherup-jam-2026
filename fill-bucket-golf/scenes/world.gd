@@ -12,13 +12,14 @@ var puck_start_position = Vector2i(100,100);
 var all_pucks = [];
 var current_puck = null;
 var pucks_in_motion = 0;
-
-@onready var wait_timer: Timer = $CanvasLayer/GridContainer/WaitTimerLabel/WaitTimer
-@onready var wait_timer_label: Label = $CanvasLayer/GridContainer/WaitTimerLabel
-@onready var pucks_counter: Label = $CanvasLayer/GridContainer/PucksCounter
-@onready var game_end_label: Label = $CanvasLayer/CenterContainer/GameEndLabel
+@onready var ui_layer: CanvasLayer = $UILayer
 @onready var thrower: Node2D = $Thrower
-@onready var level_label: Label = $CanvasLayer/LevelLabel
+
+var wait_timer_label: Label = ui_layer.wait_timer_label
+var wait_timer: Timer = ui_layer.wait_timer
+var pucks_counter: Label = ui_layer.pucks_counter
+var game_end_label: Label = ui_layer.game_end_label
+var level_label: Label = ui_layer.level_label
 
 @export_category("Timings")
 @export var shot_time = 0.5
