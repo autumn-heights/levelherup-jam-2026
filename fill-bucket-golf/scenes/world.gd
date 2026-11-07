@@ -30,7 +30,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	wait_timer_label.text = str(snapped(wait_timer.time_left, 0.1));
-	pucks_counter.text = str(pucks_in_hand) + " pucks in hand";
+	pucks_counter.text = str(pucks_in_hand) + " pucks in reserve";
 	update_pucks_in_motion()
 	
 	if pucks_in_hand == 0 and pucks_in_motion == 0 and current_puck == null and wait_timer.is_stopped():

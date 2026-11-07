@@ -41,12 +41,15 @@ func _input(event):
 			
 		elif current_state == ControlState.STATE_SETPOWER:
 			
+			current_angle = rotation;
+			
 			current_power = 0;
 			current_power = (Vector2(0,0) - event.position).length();
 			current_power = clamp(current_power, MIN_MOUSE_DIST, MAX_MOUSE_DIST);
 			
 			$MeterSprite.scale.x = max(1, current_power*0.5 - (BAR_OFFSET * 2));
 			$MeterSprite.position.x = (0.5*$MeterSprite.scale.x) + BAR_OFFSET;
+			
 			
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("Left_Click"):
