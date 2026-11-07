@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://bqs5skvx6urnw"]
+
+[ext_resource type="PackedScene" uid="uid://dk07oynjb2ec6" path="res://scenes/thrower.tscn" id="1_nnsk1"]
+[ext_resource type="Script" uid="uid://bjhrjeia7dlr7" path="res://scenes/world.gd" id="1_rwgxs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_drnfr"]
+size = Vector2(600, 20)
+
+[node name="World" type="Node2D" unique_id=90205617]
+script = ExtResource("1_rwgxs")
+
+[node name="Thrower" parent="." unique_id=4659465 instance=ExtResource("1_nnsk1")]
+visible = true
+position = Vector2(20, 300)
+
+[node name="Borders" type="Node2D" parent="." unique_id=2140081404]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Borders" unique_id=775871465]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D" unique_id=1764842078]
+position = Vector2(303, 0)
+shape = SubResource("RectangleShape2D_drnfr")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Borders" unique_id=951459511]
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D2" unique_id=1395566609]
+position = Vector2(303, 0)
+shape = SubResource("RectangleShape2D_drnfr")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Borders" unique_id=1483206033]
+position = Vector2(0, 600)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D3" unique_id=1820780870]
+position = Vector2(303, 0)
+shape = SubResource("RectangleShape2D_drnfr")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Borders" unique_id=716282643]
+position = Vector2(600, 0)
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D4" unique_id=167827431]
+position = Vector2(303, 0)
+shape = SubResource("RectangleShape2D_drnfr")
+
+[node name="WaitTimer" type="Timer" parent="." unique_id=1118882029]
+
+[node name="WaitTimerLabel" type="Label" parent="WaitTimer" unique_id=601093346]
+offset_left = 485.0
+offset_top = 23.0
+offset_right = 560.0
+offset_bottom = 60.0
+
+[node name="PucksCounter" type="Label" parent="." unique_id=1141681282]
+offset_left = 513.0
+offset_top = 66.0
+offset_right = 553.0
+offset_bottom = 89.0
+
+[node name="GameEndLabel" type="Label" parent="." unique_id=486701100]
+visible = false
+offset_left = 151.0
+offset_top = 137.0
+offset_right = 517.0
+offset_bottom = 294.0
+text = "game end :)"
