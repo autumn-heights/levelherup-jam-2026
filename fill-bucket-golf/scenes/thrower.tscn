@@ -11,6 +11,5 @@ region = Rect2(5, 5, 1, 1)
 script = ExtResource("1_ca04e")
 
 [node name="MeterSprite" type="Sprite2D" parent="." unique_id=11861033]
-position = Vector2(34, 0)
-scale = Vector2(63.5, 1.5)
+position = Vector2(2, 0)
 texture = SubResource("AtlasTexture_h7q0l")
