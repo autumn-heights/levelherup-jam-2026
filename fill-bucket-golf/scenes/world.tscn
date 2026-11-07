@@ -86,4 +86,11 @@ metadata/_edit_use_anchors_ = true
 [node name="WaitTimer" type="Timer" parent="CanvasLayer/GridContainer/WaitTimerLabel" unique_id=1118882029]
 one_shot = true
 
+[node name="LevelLabel" type="Label" parent="CanvasLayer" unique_id=35640640]
+offset_left = 19.0
+offset_top = 508.0
+offset_right = 66.0
+offset_bottom = 535.0
+
 [node name="LevelGrid" parent="." unique_id=742980925 instance=ExtResource("2_4wyf3")]
+visible = false

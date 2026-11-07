@@ -4,6 +4,11 @@ var scene_puck = preload("res://scenes/puck.tscn");
 
 var pucks_in_hand = 3;
 
+var total_levels = 2;
+var current_level = 0;
+var total_score = 0;
+var puck_start_position = Vector2i(100,100);
+
 var all_pucks = [];
 var current_puck = null;
 var pucks_in_motion = 0;
@@ -13,6 +18,7 @@ var pucks_in_motion = 0;
 @onready var pucks_counter: Label = $CanvasLayer/GridContainer/PucksCounter
 @onready var game_end_label: Label = $CanvasLayer/CenterContainer/GameEndLabel
 @onready var thrower: Node2D = $Thrower
+@onready var level_label: Label = $CanvasLayer/LevelLabel
 
 @export_category("Timings")
 @export var shot_time = 0.5
@@ -24,13 +30,16 @@ func _ready() -> void:
 	thrower.create_puck_request.connect(create_puck)
 	thrower.shoot_puck.connect(shoot_puck)
 	wait_timer.timeout.connect(wait_timer_timeout)
-	create_puck();
+	
+	current_level = 1;
+	load_level(current_level);
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	wait_timer_label.text = str(snapped(wait_timer.time_left, 0.1));
 	pucks_counter.text = str(pucks_in_hand) + " pucks in reserve";
+	level_label.text = "Level " + str(current_level);
 	update_pucks_in_motion()
 	
 	if pucks_in_hand == 0 and pucks_in_motion == 0 and current_puck == null and wait_timer.is_stopped():
@@ -57,16 +66,15 @@ func shoot_puck(angle, strength):
 		wait_timer.start();
 		
 	
-	# ready up for the next shot
-	pass
 
 func create_puck():
 	if pucks_in_hand > 0:
 		pucks_in_hand -= 1;
 		current_puck = scene_puck.instantiate();
 		add_child(current_puck)
-		current_puck.position = Vector2i(100,100);
+		current_puck.position = puck_start_position;
 		current_puck.freeze = 1;
+		current_puck.report_puck_stopped.connect(_on_report_puck_stopped);
 		thrower.ready_up()
 		all_pucks.append(current_puck);
 		thrower.position = current_puck.position;
@@ -75,8 +83,12 @@ func create_puck():
 
 func wait_timer_timeout():
 	if current_puck == null:
-		game_end_label.show();
-		## game end maybe?
+		wrap_up_level();
+		if current_level < total_levels:
+			current_level += 1;
+			load_level(current_level);
+		else:
+			wrap_up_game();
 	else:
 		create_puck()
 
@@ -85,4 +97,26 @@ func update_pucks_in_motion():
 	for puck in all_pucks:
 		if puck.linear_velocity.length() > 10:
 			pucks_in_motion += 1;
+
+func _on_report_puck_stopped(screen_coords):
+	print(screen_coords)
+	#TODO report puck stopped at screen_coords
+
+func load_level(level_id):
+	#TODO unload current level if exists
+	#TODO load level with id level_id
+	pucks_in_hand = 3;
+	create_puck();
+	
+func wrap_up_level():
+	#TODO ask the level for how well it's coloured in and get a score
+	total_score += 10
+	for puck in all_pucks:
+		puck.queue_free()
+	all_pucks = []
+	
+
+func wrap_up_game():
+	$LevelGrid.hide();
+	game_end_label.show();
 	

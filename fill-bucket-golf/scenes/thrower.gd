@@ -4,7 +4,7 @@ const MIN_MOUSE_DIST = 2;
 const MAX_MOUSE_DIST = 500;
 const BAR_OFFSET = 2;
 
-@export var MIN_FORCE = 30;
+@export var MIN_FORCE = 2;
 @export var MAX_FORCE = 1600;
 
 
