@@ -15,4 +15,4 @@ region: int, isFilled = false, isBoundary = false) -> void:
 	Region = region
 	
 func matches(x, y) -> bool:
-	return (Gridspace.x == x && Gridspace.y == y )
+	return (Gridspace.x == x and Gridspace.y == y )
