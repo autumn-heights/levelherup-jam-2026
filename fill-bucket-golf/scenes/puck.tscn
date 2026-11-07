@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://q12tuinvxb5s"]
 
 [ext_resource type="Script" uid="uid://dvhqabxjblvam" path="res://scenes/puck.gd" id="1_c1wug"]
-[ext_resource type="Texture2D" path="res://ball-export.png" id="1_gj0yh"]
+[ext_resource type="Texture2D" uid="uid://brupcqgy6kamt" path="res://ART/ball-export.png" id="1_gj0yh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h7q0l"]
 radius = 8.0

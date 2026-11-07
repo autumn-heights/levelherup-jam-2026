@@ -42,3 +42,25 @@ rotation = 1.5707964
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D4" unique_id=167827431]
 position = Vector2(303, 0)
 shape = SubResource("RectangleShape2D_drnfr")
+
+[node name="WaitTimer" type="Timer" parent="." unique_id=1118882029]
+
+[node name="WaitTimerLabel" type="Label" parent="WaitTimer" unique_id=601093346]
+offset_left = 485.0
+offset_top = 23.0
+offset_right = 560.0
+offset_bottom = 60.0
+
+[node name="PucksCounter" type="Label" parent="." unique_id=1141681282]
+offset_left = 513.0
+offset_top = 66.0
+offset_right = 553.0
+offset_bottom = 89.0
+
+[node name="GameEndLabel" type="Label" parent="." unique_id=486701100]
+visible = false
+offset_left = 151.0
+offset_top = 137.0
+offset_right = 517.0
+offset_bottom = 294.0
+text = "game end :)"

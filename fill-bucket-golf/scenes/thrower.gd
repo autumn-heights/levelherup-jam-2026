@@ -58,7 +58,6 @@ func _input(event):
 			pass
 			
 		print("Mouse Click/Unclick at: ", event.position)
-		rotation += 10;
 		
 		if current_state == ControlState.STATE_READY:
 			mouse_click_position = event.position;
@@ -71,10 +70,15 @@ func _input(event):
 			trigger_launch(current_angle, current_power)
 			
 			current_state = ControlState.STATE_PLAYERWAIT;
+			$MeterSprite.hide();
 			
 		elif current_state == ControlState.STATE_PLAYERWAIT:
-			
-			current_state = ControlState.STATE_READY;
+			pass
+			#current_state = ControlState.STATE_READY;
 
 func trigger_launch(angle, power):
 	shoot_puck.emit(angle, power)
+	
+func ready_up():
+	current_state = ControlState.STATE_READY;
+	$MeterSprite.show();
