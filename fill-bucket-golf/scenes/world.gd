@@ -2,7 +2,7 @@ extends Node2D
 
 var scene_puck = preload("res://scenes/puck.tscn");
 
-var pucks_in_hand = 1;
+var pucks_in_hand = 3;
 
 var all_pucks = [];
 var current_puck = null;
@@ -16,14 +16,14 @@ var pucks_in_motion = 0;
 
 @export_category("Timings")
 @export var shot_time = 0.5
-@export var end_time = 6.0
+@export var end_time = 2.0
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	thrower.create_puck_request.connect(create_puck)
 	thrower.shoot_puck.connect(shoot_puck)
-	wait_timer.timeout.connect(create_puck)
+	wait_timer.timeout.connect(wait_timer_timeout)
 	create_puck();
 
 
@@ -48,8 +48,13 @@ func shoot_puck(angle, strength):
 	# if it was the last puck, wait for them all to finish timer
 	if pucks_in_hand == 0:
 		wait_timer_label.show();
-		wait_timer.wait_time = 10.0;
+		wait_timer.wait_time = end_time;
 		wait_timer.start();
+	else:
+		wait_timer_label.show();
+		wait_timer.wait_time = shot_time;
+		wait_timer.start();
+		
 	
 	# ready up for the next shot
 	pass
@@ -74,7 +79,7 @@ func wait_timer_timeout():
 		create_puck()
 
 func update_pucks_in_motion():
-	var pucks_in_motion = 0
+	pucks_in_motion = 0
 	for puck in all_pucks:
 		if puck.linear_velocity.length() > 10:
 			pucks_in_motion += 1;
