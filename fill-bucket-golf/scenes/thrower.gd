@@ -4,8 +4,8 @@ const MIN_MOUSE_DIST = 2;
 const MAX_MOUSE_DIST = 500;
 const BAR_OFFSET = 2;
 
-@export var MIN_FORCE = 30;
-@export var MAX_FORCE = 1200
+@export var MIN_FORCE = 2;
+@export var MAX_FORCE = 1600;
 
 
 var current_angle = 0;
@@ -39,11 +39,7 @@ func _input(event):
 	# Mouse in viewport coordinates.
 	if event is InputEventMouseMotion:
 		look_at(event.global_position)
-		if current_state == ControlState.STATE_READY:
-			
-			current_angle = rotation;
-			
-		elif current_state == ControlState.STATE_SETPOWER:
+		if current_state == ControlState.STATE_READY || current_state == ControlState.STATE_SETPOWER:
 			
 			current_angle = rotation;
 			
