@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://jfyb1eprsq0q"]
+
+[ext_resource type="Script" uid="uid://das4uvtniv4dm" path="res://World/level_grid.gd" id="1_2non0"]
+
+[sub_resource type="TileSet" id="TileSet_v04oy"]
+
+[node name="LevelGrid" type="TileMapLayer" unique_id=742980925]
+tile_set = SubResource("TileSet_v04oy")
+script = ExtResource("1_2non0")
