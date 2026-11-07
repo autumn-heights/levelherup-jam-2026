@@ -13,7 +13,6 @@ var current_power = 0;
 
 var mouse_click_position = Vector2(0,0);
 signal shoot_puck(angle, power)
-signal create_puck_request
 
 enum ControlState {
 	STATE_READY,
@@ -30,7 +29,7 @@ func _ready() -> void:
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	
 	pass
 
@@ -48,7 +47,7 @@ func _input(event):
 			current_angle = rotation;
 			
 			current_power = 0;
-			current_power = (Vector2(0,0) - event.position).length();
+			current_power = event.global_position.distance_to(global_position);
 			current_power = clamp(current_power, MIN_MOUSE_DIST, MAX_MOUSE_DIST);
 			
 			$MeterSprite.scale.x = max(1, current_power*0.5 - (BAR_OFFSET * 2));
