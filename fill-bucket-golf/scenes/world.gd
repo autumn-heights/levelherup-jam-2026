@@ -27,7 +27,7 @@ var pucks_in_motion = 0;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	thrower.create_puck_request.connect(create_puck)
+	#thrower.create_puck_request.connect(create_puck)
 	thrower.shoot_puck.connect(shoot_puck)
 	wait_timer.timeout.connect(wait_timer_timeout)
 	
