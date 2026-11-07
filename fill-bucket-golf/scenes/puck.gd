@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+var current_hue = 0.0
+var hue_change_rate = 0.001
 
 @export_category("Physics")
 @export var motion_velocity_threshold = 10;
@@ -16,6 +18,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	current_hue = fmod(current_hue + hue_change_rate, TAU)
+	$Sprite2D.modulate = Color.from_hsv(current_hue, 1, 1)
+	
 	if linear_velocity.length() < motion_velocity_threshold and in_motion == true:
 		# send a signal because i just came to a stop
 		report_puck_stopped.emit(position)
