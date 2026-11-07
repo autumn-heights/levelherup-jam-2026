@@ -1,8 +1,8 @@
 extends Node2D
 
-const MIN_MOUSE_DIST = 32;
-const MAX_MOUSE_DIST = 1000;
-const BAR_OFFSET = 32;
+const MIN_MOUSE_DIST = 2;
+const MAX_MOUSE_DIST = 500;
+const BAR_OFFSET = 2;
 
 var current_angle = 0;
 var current_power = 0;

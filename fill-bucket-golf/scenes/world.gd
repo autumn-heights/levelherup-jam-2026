@@ -8,26 +8,35 @@ var all_pucks = [];
 var current_puck = null;
 var pucks_in_motion = 0;
 
+@onready var wait_timer: Timer = $CanvasLayer/GridContainer/WaitTimerLabel/WaitTimer
+@onready var wait_timer_label: Label = $CanvasLayer/GridContainer/WaitTimerLabel
+@onready var pucks_counter: Label = $CanvasLayer/GridContainer/PucksCounter
+@onready var game_end_label: Label = $CanvasLayer/CenterContainer/GameEndLabel
+@onready var thrower: Node2D = $Thrower
 
+@export_category("Timings")
+@export var shot_time = 0.5
+@export var end_time = 6.0
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$Thrower.create_puck_request.connect(create_puck)
-	$Thrower.shoot_puck.connect(shoot_puck)
-	
+	thrower.create_puck_request.connect(create_puck)
+	thrower.shoot_puck.connect(shoot_puck)
+	wait_timer.timeout.connect(create_puck)
 	create_puck();
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	$WaitTimer/WaitTimerLabel.text = str($WaitTimer.time_left);
-	$PucksCounter.text = str(pucks_in_hand) + " pucks in hand";
+	wait_timer_label.text = str(snapped(wait_timer.time_left, 0.1));
+	pucks_counter.text = str(pucks_in_hand) + " pucks in hand";
 	update_pucks_in_motion()
 	
-	if pucks_in_hand == 0 and pucks_in_motion == 0 and current_puck == null:
-		$GameEndLabel.show();
-	
+	if pucks_in_hand == 0 and pucks_in_motion == 0 and current_puck == null and wait_timer.is_stopped():
+		wait_timer.start(end_time)
+		
+		
 	pass
 	
 func shoot_puck(angle, strength):
@@ -38,9 +47,9 @@ func shoot_puck(angle, strength):
 	
 	# if it was the last puck, wait for them all to finish timer
 	if pucks_in_hand == 0:
-		$WaitTimer/WaitTimerLabel.show();
-		$WaitTimer.wait_time = 10.0;
-		$WaitTimer.start();
+		wait_timer_label.show();
+		wait_timer.wait_time = 10.0;
+		wait_timer.start();
 	
 	# ready up for the next shot
 	pass
@@ -51,12 +60,18 @@ func create_puck():
 		current_puck = scene_puck.instantiate();
 		add_child(current_puck)
 		current_puck.position = Vector2i(100,100);
-		
+		thrower.ready_up()
 		all_pucks.append(current_puck);
-		$Thrower.position = current_puck.position;
+		thrower.position = current_puck.position;
 	else:
 		current_puck = null;
 
+func wait_timer_timeout():
+	if current_puck == null:
+		game_end_label.show();
+		## game end maybe?
+	else:
+		create_puck()
 
 func update_pucks_in_motion():
 	var pucks_in_motion = 0
