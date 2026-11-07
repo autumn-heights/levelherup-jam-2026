@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dk07oynjb2ec6" path="res://scenes/thrower.tscn" id="1_nnsk1"]
 [ext_resource type="Script" uid="uid://bjhrjeia7dlr7" path="res://scenes/world.gd" id="1_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://jfyb1eprsq0q" path="res://World/LevelGrid.tscn" id="2_4wyf3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_drnfr"]
 size = Vector2(600, 90)
@@ -84,3 +85,5 @@ metadata/_edit_use_anchors_ = true
 
 [node name="WaitTimer" type="Timer" parent="CanvasLayer/GridContainer/WaitTimerLabel" unique_id=1118882029]
 one_shot = true
+
+[node name="LevelGrid" parent="." unique_id=742980925 instance=ExtResource("2_4wyf3")]
