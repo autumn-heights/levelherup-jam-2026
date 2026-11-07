@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cj3yt3pbqofoi"]
+
+[ext_resource type="Script" uid="uid://bwfeneukmcy6t" path="res://scenes/Audio/note_generator.gd" id="1_uh5i7"]
+
+[node name="AudioHandler" type="Node2D" unique_id=929480268]
+
+[node name="NoteGenerator" type="Node" parent="." unique_id=1505334564]
+script = ExtResource("1_uh5i7")
+
+[node name="NoteGeneratorPlayer" type="AudioStreamPlayer2D" parent="NoteGenerator" unique_id=1707235940]

@@ -1,6 +1,6 @@
 extends Node2D
 
-const MIN_MOUSE_DIST = 200;
+const MIN_MOUSE_DIST = 32;
 const MAX_MOUSE_DIST = 1000;
 const BAR_OFFSET = 32;
 
@@ -48,16 +48,35 @@ func _input(event):
 			$MeterSprite.scale.x = max(1, current_power - BAR_OFFSET*2);
 			$MeterSprite.position.x = 0.5 * current_power + BAR_OFFSET;
 			
-
-
-
 	if event is InputEventMouseButton:
 		if event.is_action_pressed("Left_Click"):
-			pass
+			match current_state:
+				ControlState.STATE_SETPOWER:
+					report_state_mismatch()
+				ControlState.STATE_READY:
+					## this is the correct state to recieve this input !! well done
+					mouse_click_position = event.position;
+					current_state = ControlState.STATE_SETPOWER;
+					pass
+				ControlState.STATE_PLAYERWAIT:
+					report_state_mismatch()
+					pass
 		elif event.is_action_released("Left_Click"):
-			pass
+			match current_state:
+				ControlState.STATE_SETPOWER:
+					## this is the correct state to recieve this input !! well done
+					shoot_puck.emit(current_angle, current_power)
+					current_state = ControlState.STATE_PLAYERWAIT;
+					pass
+				ControlState.STATE_READY:
+					report_state_mismatch()
+					pass
+				ControlState.STATE_PLAYERWAIT:
+					report_state_mismatch()
+					pass
 			
 		print("Mouse Click/Unclick at: ", event.position)
+<<<<<<< Updated upstream
 		
 		if current_state == ControlState.STATE_READY:
 			mouse_click_position = event.position;
@@ -82,3 +101,11 @@ func trigger_launch(angle, power):
 func ready_up():
 	current_state = ControlState.STATE_READY;
 	$MeterSprite.show();
+=======
+
+
+func report_state_mismatch():
+	printerr("this buttonpress should not be recieved in the state ", state_to_str())
+func state_to_str():
+	return ControlState.keys()[current_state]
+>>>>>>> Stashed changes
