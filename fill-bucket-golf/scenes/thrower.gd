@@ -67,6 +67,7 @@ func _input(event):
 					## this is the correct state to recieve this input !! well done
 					shoot_puck.emit(current_angle, current_power)
 					current_state = ControlState.STATE_PLAYERWAIT;
+					$MeterSprite.hide();
 					pass
 				ControlState.STATE_READY:
 					report_state_mismatch()
@@ -76,24 +77,6 @@ func _input(event):
 					pass
 			
 		print("Mouse Click/Unclick at: ", event.position)
-<<<<<<< Updated upstream
-		
-		if current_state == ControlState.STATE_READY:
-			mouse_click_position = event.position;
-			
-			current_state = ControlState.STATE_SETPOWER;
-			
-		elif current_state == ControlState.STATE_SETPOWER:
-			
-			# trigger_launch ( current_angle, current_power )
-			trigger_launch(current_angle, current_power)
-			
-			current_state = ControlState.STATE_PLAYERWAIT;
-			$MeterSprite.hide();
-			
-		elif current_state == ControlState.STATE_PLAYERWAIT:
-			pass
-			#current_state = ControlState.STATE_READY;
 
 func trigger_launch(angle, power):
 	shoot_puck.emit(angle, power)
@@ -101,11 +84,8 @@ func trigger_launch(angle, power):
 func ready_up():
 	current_state = ControlState.STATE_READY;
 	$MeterSprite.show();
-=======
-
 
 func report_state_mismatch():
 	printerr("this buttonpress should not be recieved in the state ", state_to_str())
 func state_to_str():
 	return ControlState.keys()[current_state]
->>>>>>> Stashed changes
