@@ -30,4 +30,5 @@ shape = SubResource("CircleShape2D_h7q0l")
 
 [node name="SamplePlayer" type="AudioStreamPlayer2D" parent="." unique_id=730197967]
 stream = SubResource("AudioStreamPolyphonic_drnfr")
+max_polyphony = 2
 script = ExtResource("3_ctoid")

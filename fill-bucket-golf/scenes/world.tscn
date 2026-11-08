@@ -21,7 +21,7 @@ position = Vector2(20, 321)
 [node name="Borders" type="Node2D" parent="." unique_id=2140081404]
 script = ExtResource("3_71j4m")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Borders" unique_id=775871465]
+[node name="StaticBody2D" type="StaticBody2D" parent="Borders" unique_id=775871465 groups=["Wall"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D" unique_id=1764842078]
 position = Vector2(390, 248)
