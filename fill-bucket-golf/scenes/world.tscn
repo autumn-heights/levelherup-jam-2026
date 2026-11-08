@@ -6,12 +6,6 @@
 [ext_resource type="Script" uid="uid://dpf4n35y738ly" path="res://scenes/borders.gd" id="3_71j4m"]
 [ext_resource type="PackedScene" uid="uid://cxwry3wfpwcdb" path="res://scenes/UI/canvas_layer.tscn" id="4_k0juu"]
 
-[ext_resource type="PackedScene" uid="uid://cxwry3wfpwcdb" path="res://scenes/UI/canvas_layer.tscn" id="4_k0juu"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_drnfr"]
-size = Vector2(600, 100)
-
-
 [node name="World" type="Node2D" unique_id=90205617]
 script = ExtResource("1_rwgxs")
 
