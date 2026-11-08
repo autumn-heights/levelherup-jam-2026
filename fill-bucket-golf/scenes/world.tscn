@@ -4,10 +4,8 @@
 [ext_resource type="Script" uid="uid://bjhrjeia7dlr7" path="res://scenes/world.gd" id="1_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://jfyb1eprsq0q" path="res://World/LevelGrid.tscn" id="2_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://bs0srx22746xf" path="res://scenes/UI/Inventory.tscn" id="2_71j4m"]
+[ext_resource type="Script" uid="uid://dpf4n35y738ly" path="res://scenes/borders.gd" id="3_71j4m"]
 [ext_resource type="PackedScene" uid="uid://cxwry3wfpwcdb" path="res://scenes/UI/canvas_layer.tscn" id="4_k0juu"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_drnfr"]
-size = Vector2(600, 100)
 
 [node name="World" type="Node2D" unique_id=90205617]
 script = ExtResource("1_rwgxs")
@@ -16,26 +14,23 @@ script = ExtResource("1_rwgxs")
 position = Vector2(20, 321)
 
 [node name="Borders" type="Node2D" parent="." unique_id=2140081404]
+script = ExtResource("3_71j4m")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Borders" unique_id=775871465]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D" unique_id=1764842078]
-position = Vector2(290, -50)
-shape = SubResource("RectangleShape2D_drnfr")
+position = Vector2(390, 248)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/StaticBody2D" unique_id=1395566609]
-position = Vector2(-50, 290)
+position = Vector2(215, 302)
 rotation = 1.5707964
-shape = SubResource("RectangleShape2D_drnfr")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Borders/StaticBody2D" unique_id=1820780870]
-position = Vector2(290, 594)
-shape = SubResource("RectangleShape2D_drnfr")
+position = Vector2(291, 457)
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Borders/StaticBody2D" unique_id=167827431]
-position = Vector2(594, 280)
+position = Vector2(324, 303)
 rotation = 1.5707964
-shape = SubResource("RectangleShape2D_drnfr")
 
 [node name="LevelGrid" parent="." unique_id=742980925 instance=ExtResource("2_4wyf3")]
 
