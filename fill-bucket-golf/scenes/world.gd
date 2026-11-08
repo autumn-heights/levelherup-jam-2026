@@ -3,8 +3,14 @@ extends Node2D
 var scene_puck = preload("res://scenes/puck.tscn");
 
 var pucks_in_hand = 3;
+const PUCK_INVENTORY_BY_LEVEL = [
+	#level 1:
+	[Vector2i(0,1), Vector2i(0,2), Vector2i(0,3) ],
+	#level 2:
+	[Vector2i(0,4), Vector2i(0,5), Vector2i(0,6) ]
+]
 
-var total_levels = 2;
+const TOTAL_LEVELS = 2;
 var current_level = 0;
 var total_score = 0;
 var puck_start_position = Vector2i(100,100);
@@ -70,12 +76,14 @@ func shoot_puck(angle, strength):
 
 func create_puck():
 	if pucks_in_hand > 0:
+		var colour_id = PUCK_INVENTORY_BY_LEVEL[current_level][-pucks_in_hand]
 		pucks_in_hand -= 1;
 		current_puck = scene_puck.instantiate();
 		add_child(current_puck)
 		current_puck.position = puck_start_position;
 		current_puck.freeze = 1;
 		current_puck.report_puck_stopped.connect(_on_report_puck_stopped);
+		current_puck.set_puck_colour(colour_id)
 		thrower.ready_up()
 		all_pucks.append(current_puck);
 		thrower.position = current_puck.position;
@@ -85,7 +93,7 @@ func create_puck():
 func wait_timer_timeout():
 	if current_puck == null:
 		wrap_up_level();
-		if current_level < total_levels:
+		if current_level < PUCK_INVENTORY_BY_LEVEL:
 			current_level += 1;
 			load_level(current_level);
 		else:
