@@ -36,10 +36,12 @@ var all_pucks = [];
 var current_puck = null;
 var pucks_in_motion = 0;
 
-@onready var level_grid = $LevelGrid
+@onready var level_grid = $GameViewer/LevelGrid
 @onready var ui_layer: CanvasLayer = $UILayer
-@onready var thrower: Node2D = $Thrower
 @onready var inventory = $Inventory
+@onready var thrower: Node2D = $GameViewer/Thrower
+@onready var borders: Node2D = $GameViewer/Borders
+
 
 @onready var wait_timer_label = ui_layer.wait_timer_label
 @onready var wait_timer = ui_layer.wait_timer
@@ -97,13 +99,14 @@ func shoot_puck(angle, strength):
 		wait_timer.start();
 		
 	
+@onready var game_viewer: Node2D = $GameViewer
 
 func create_puck():
 	if pucks_in_hand > 0:
 		var colour_id = PUCK_INVENTORY_BY_LEVEL[current_level-1][-pucks_in_hand]
 		pucks_in_hand -= 1;
 		current_puck = scene_puck.instantiate();
-		add_child(current_puck)
+		game_viewer.add_child(current_puck)
 		current_puck.position = puck_start_position;
 		current_puck.freeze = 1;
 		current_puck.report_puck_stopped.connect(_on_report_puck_stopped);
@@ -125,6 +128,7 @@ func wait_timer_timeout():
 			load_level(current_level);
 		else:
 			wrap_up_game();
+var viewer_ratio = 0.8
 
 func update_pucks_in_motion():
 	pucks_in_motion = 0
@@ -143,7 +147,7 @@ func _on_report_puck_stopped(puck):
 
 func load_level(level_id):
 	level_grid.construct_scene(filenames[level_id -1])
-	$Borders.generate_borders(level_grid)
+	borders.generate_borders(level_grid)
 	pucks_in_hand = PUCK_INVENTORY_BY_LEVEL[level_id-1].size();
 	inventory.add_display_pucks(PUCK_INVENTORY_BY_LEVEL[level_id-1])
 	create_puck();
@@ -152,6 +156,10 @@ func load_level(level_id):
 
 func orgainse_screen_elements():
 	var board_area : Vector2 = level_grid.get_used_rect().size * level_grid.tile_set.tile_size
+	var screensize = Vector2(544, 544)
+	
+	var ideal_size = screensize * viewer_ratio
+	game_viewer.scale = ideal_size / board_area
 	#print(board_area)
 	#DisplayServer.window_set_size(board_area + table_border)
 
@@ -164,7 +172,7 @@ func wrap_up_level():
 	
 
 func wrap_up_game():
-	$LevelGrid.hide();
+	level_grid.hide();
 	game_end_label.show();
 	# figure out how to display score
 	#game_end_label.text += "\n Your score: " + str(total_score)

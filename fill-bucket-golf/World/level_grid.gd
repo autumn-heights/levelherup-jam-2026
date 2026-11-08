@@ -55,7 +55,7 @@ func construct_scene(fileName) -> Vector2i:
 # receive the puck landing event
 func puck_landed(puck: Puck) -> int:
 	#identify region
-	var local = to_local(puck.position)
+	var local = to_local(puck.global_position)
 	var map = local_to_map(local)
 	var artmap :ArtMap  = GetCell(map.x, map.y)
 	if (artmap.Region == 0):
