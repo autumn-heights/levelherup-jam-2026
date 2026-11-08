@@ -2,7 +2,7 @@ extends Node2D
 
 var scene_puck = preload("res://scenes/puck.tscn");
 
-const PUCK_DISPLAY_OFFSET = Vector2(50, 0)
+const PUCK_DISPLAY_OFFSET = Vector2(25, 0)
 
 var my_display_pucks = []
 
@@ -23,11 +23,12 @@ func add_display_pucks(colour_id_array):
 		my_display_pucks.append(new_puck)
 		add_child(new_puck)
 		new_puck.set_puck_colour(colour_id)
-		new_puck.position = position + PUCK_DISPLAY_OFFSET*my_display_pucks.size()
+		new_puck.position = PUCK_DISPLAY_OFFSET*my_display_pucks.size()
+		print('position: ', position, ', new_puck.position: ', new_puck.position)
 		new_puck.freeze = true
 		new_puck.freeze_mode = 0
 		print(new_puck, ', ', new_puck.position)
 		
 func remove_display_puck():
-	var puck_to_remove = my_display_pucks.pop()
+	var puck_to_remove = my_display_pucks.pop_back()
 	puck_to_remove.queue_free()

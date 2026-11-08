@@ -55,3 +55,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="WaitTimer" type="Timer" parent="InfoContainer/VBoxContainer/GridContainer/WaitTimerLabel" unique_id=1997438668]
 one_shot = true
+
+[node name="ScoreLabel" type="Label" parent="InfoContainer/VBoxContainer/GridContainer" unique_id=333513869]
+layout_mode = 2
+text = "score: 0pts"

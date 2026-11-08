@@ -128,4 +128,13 @@ func on_test_timer_timeout():
 	debugCounter += 1 
 	debugCounter = debugCounter % regionCounter + 1
 
+
+func get_score():
+	# score = number of cells not white
+	var score = 0
+	for cell in loadedWorld:
+		if cell.colour != Vector2i(0,0):
+			score += 10
+			
+	return score
 	
