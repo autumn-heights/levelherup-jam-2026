@@ -15,11 +15,11 @@ var pucks_in_motion = 0;
 @onready var ui_layer: CanvasLayer = $UILayer
 @onready var thrower: Node2D = $Thrower
 
-var wait_timer_label: Label = ui_layer.wait_timer_label
-var wait_timer: Timer = ui_layer.wait_timer
-var pucks_counter: Label = ui_layer.pucks_counter
-var game_end_label: Label = ui_layer.game_end_label
-var level_label: Label = ui_layer.level_label
+@onready var wait_timer_label = ui_layer.wait_timer_label
+@onready var wait_timer = ui_layer.wait_timer
+@onready var pucks_counter = ui_layer.pucks_counter
+@onready var game_end_label = ui_layer.game_end_label
+@onready var level_label = ui_layer.level_label
 
 @export_category("Timings")
 @export var shot_time = 0.5
