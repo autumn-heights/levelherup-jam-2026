@@ -1,11 +1,11 @@
 extends TileMapLayer
 
-const SCREEN_SIZE_PX = Vector2(544,544)
-const CELL_WIDTH_PX = 16
-const GRID_WIDTH_CELLS = 34
-const  BOUNDARY_OFFSET = 1
+#const SCREEN_SIZE_PX = Vector2(544,544)
+#const CELL_WIDTH_PX = 16
+#const GRID_WIDTH_CELLS = 34
+#const  BOUNDARY_OFFSET = 1
 
-const tilemap_size = Vector2i(32,32)
+#const tilemap_size = Vector2i(32,32)
 
 var loadedWorld : Array[ArtMap]
 # auto incremented region counter.
@@ -13,11 +13,16 @@ var loadedWorld : Array[ArtMap]
 var regionCounter = 0;
 var border_coord = Vector2i(0,0)
 var blank_coord = Vector2i(1,0)
+var skipColour = "0, 0, 0"
 
 func _ready() -> void:
 	ResetWorld()
-	#construct_scene("res://ART/cat.png")
-	#debugRegions()
+	#construct_scene("res://ART/cat2.png")
+	#construct_scene("res://ART/Beanz2.png")
+	#use timer
+	#debugRegions(true)
+	#static
+	#debugRegions(false)
 
 # public function:
 # set the scene from the image filename (string, e.g. "res://ART/Beanz2.png")
@@ -29,7 +34,10 @@ func construct_scene(fileName) -> Vector2i:
 		for y in range(0, image.get_height()):
 			set_cell(Vector2i(x,y),0, blank_coord)
 			var colour :Color = image.get_pixel(x, y)
+			if (colour.r == 0 and colour.g == 0 and colour.b == 0):
+				continue
 			var colourname = "{0}, {1}, {2}".format([colour.r, colour.g, colour.b])
+
 			if(regionMap.keys().has(colourname)):
 				regionMap[colourname].append(Vector2i(x,y))
 			else :
@@ -44,14 +52,14 @@ func construct_scene(fileName) -> Vector2i:
 
 # public function:
 # receive the puck landing event
-func puck_landed(puck: Puck):
+func puck_landed(puck: Puck) -> int:
 	#identify region
 	var local = to_local(puck.position)
 	var map = local_to_map(local)
 	var artmap :ArtMap  = GetCell(map.x, map.y)
 	#flip colour - bug
 	var colour = Vector2i(puck.colour_id.y, puck.colour_id.x)
-	SetRegion(artmap.Region, colour) 
+	return SetRegion(artmap.Region, colour) 
 
 func ResetWorld(clearWorld = true) -> void: 
 	clear()
@@ -74,12 +82,16 @@ func AddRegion(regionCells: Array[Vector2i]) -> int:
 	
 #internal use only	
 #Set the region with the id to the colour from the tile map that corresponds to the vector
-func SetRegion(regionId : int, colour: Vector2i):
+func SetRegion(regionId : int, colour: Vector2i) -> int:
+	var x = 0
 	for cell in loadedWorld:
 		if (cell.Region == regionId):
 			cell.AssetCoordinate = colour
+			if(not cell.IsFilled):
+				x += 1
+			cell.IsFilled = true
 			set_cell(cell.Gridspace, 0, cell.AssetCoordinate)
-	
+	return x
 #internal use only
 #dogshit lookup for pixel at x and y
 func GetCell(x: int, y: int) -> ArtMap:
