@@ -17,6 +17,13 @@ var puck_start_position = Vector2i(100,100);
 var all_pucks = [];
 var current_puck = null;
 var pucks_in_motion = 0;
+
+@onready var wait_timer: Timer = $CanvasLayer/GridContainer/WaitTimerLabel/WaitTimer
+@onready var wait_timer_label: Label = $CanvasLayer/GridContainer/WaitTimerLabel
+@onready var pucks_counter: Label = $CanvasLayer/GridContainer/PucksCounter
+@onready var game_end_label: Label = $CanvasLayer/CenterContainer/GameEndLabel
+@onready var thrower: Node2D = $Thrower
+@onready var level_label: Label = $CanvasLayer/LevelLabel
 @onready var ui_layer: CanvasLayer = $UILayer
 @onready var thrower: Node2D = $Thrower
 @onready var level_grid = $LevelGrid
@@ -27,6 +34,8 @@ var pucks_in_motion = 0;
 @onready var game_end_label = ui_layer.game_end_label
 @onready var level_label = ui_layer.level_label
 
+@onready var level_grid: TileMapLayer = $LevelGrid
+
 @export_category("Timings")
 @export var shot_time = 0.5
 @export var end_time = 2.0
@@ -34,12 +43,14 @@ var pucks_in_motion = 0;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	level_grid.position = level_grid.tile_set.tile_size * 0.5
 	#thrower.create_puck_request.connect(create_puck)
 	thrower.shoot_puck.connect(shoot_puck)
 	wait_timer.timeout.connect(wait_timer_timeout)
 	
 	current_level = 1;
 	load_level(current_level);
+	$Borders.generate_borders(level_grid)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
