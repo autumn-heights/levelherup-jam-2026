@@ -21,7 +21,10 @@ grow_vertical = 2
 
 [node name="GameEndLabel" type="Label" parent="GameEnd" unique_id=2121310329]
 layout_mode = 2
-text = "game end :)"
+text = "game end :)
+credits:
+au, june, lou, steph
+wood texture from texturelabs.org"
 
 [node name="InfoContainer" type="PanelContainer" parent="." unique_id=1527373170]
 anchors_preset = 1
