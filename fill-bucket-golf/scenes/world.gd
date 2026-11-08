@@ -32,7 +32,7 @@ var pucks_in_motion = 0;
 
 @export_category("Timings")
 @export var shot_time = 0.5
-@export var end_time = 2.0
+@export var end_time = 5.0
 
 
 # Called when the node enters the scene tree for the first time.
