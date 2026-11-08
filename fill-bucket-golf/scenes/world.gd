@@ -118,6 +118,7 @@ func _on_report_puck_stopped(puck):
 func load_level(level_id):
 	#TODO unload current level if exists
 	#TODO load level with id level_id
+	level_grid.construct_scene("res://ART/Beanz2.png")
 	pucks_in_hand = PUCK_INVENTORY_BY_LEVEL[level_id-1].size();
 	inventory.add_display_pucks(PUCK_INVENTORY_BY_LEVEL[level_id-1])
 	create_puck();

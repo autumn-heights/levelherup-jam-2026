@@ -27,6 +27,7 @@ func construct_scene(fileName) -> Vector2i:
 	var regionMap = {} #Dictionary["color":, Array[Vector2i]]
 	for x in range(0, image.get_width()):
 		for y in range(0, image.get_height()):
+			set_cell(Vector2i(x,y),0, blank_coord)
 			var colour :Color = image.get_pixel(x, y)
 			var colourname = "{0}, {1}, {2}".format([colour.r, colour.g, colour.b])
 			if(regionMap.keys().has(colourname)):
@@ -50,9 +51,7 @@ func puck_landed(puck: Puck):
 	SetRegion(artmap.Region, Vector2i(3,0)) #to do: get the colour from the puck
 
 func ResetWorld(clearWorld = true) -> void: 
-	for x in tilemap_size.x:
-		for y in tilemap_size.y:
-			set_cell(Vector2i(x,y), 0, blank_coord)
+	clear()
 	if(clearWorld):
 		for cell in loadedWorld:
 			cell.AssetCoordinate = blank_coord
