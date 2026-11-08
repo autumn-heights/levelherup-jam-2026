@@ -27,7 +27,9 @@ func _ready() -> void:
 # set the scene from the image filename (string, e.g. "res://ART/Beanz2.png")
 # returns the size of the image set (i.e. unique tiles e.g. 16 * 16, 32 * 32, etc)
 func construct_scene(fileName) -> Vector2i:
-	var image = Image.load_from_file(fileName)
+	var image = load(fileName).get_image()
+	if image.is_compressed():
+		image.decompress()
 	var regionMap = {} #Dictionary["color":, Array[Vector2i]]
 	for x in range(0, image.get_width()):
 		for y in range(0, image.get_height()):

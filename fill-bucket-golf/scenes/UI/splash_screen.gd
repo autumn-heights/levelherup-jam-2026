@@ -14,7 +14,7 @@ func _ready() -> void:
 	for button in get_tree().get_nodes_in_group("Button"):
 		button.pressed.connect(button_handler.bind(button))
 func button_handler(button):
-	print(button, " pressed")
+	#print(button, " pressed")
 	match button.name:
 		"StartButton":
 			##load first level
@@ -31,7 +31,7 @@ func button_handler(button):
 
 func set_parralax():
 	var v_rect = get_viewport().get_visible_rect()
-	print("visible size: ", v_rect.size)
+	#print("visible size: ", v_rect.size)
 	parallax_sprite.position = get_viewport().get_visible_rect().size * 0.5
 	parallax_sprite.rotation = deg_to_rad(sprite_rotation_deg)
 	parallax_2d.repeat_size = Vector2.ONE * sprite_spacing

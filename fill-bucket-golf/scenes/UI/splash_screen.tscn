@@ -53,8 +53,6 @@ offset_bottom = 31.0
 grow_horizontal = 0
 text = "Settings"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1592600503]
-
 [node name="Settings" type="Control" parent="." unique_id=440578215]
 layout_mode = 3
 anchors_preset = 15
@@ -71,10 +69,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Settings/PanelContainer2" unique_id=1222958989]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/PanelContainer2" unique_id=1245751703]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="Settings/PanelContainer2/VBoxContainer" unique_id=1222958989]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Jokes on us... nothings here yet...?"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Settings/PanelContainer2/VBoxContainer" unique_id=1303794473]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Click and release to launch pucks
+more colored cells means more points
+discover the art within!"
 horizontal_alignment = 1
 
 [node name="CloseSettings" type="Button" parent="Settings" unique_id=19147665 groups=["Button"]]

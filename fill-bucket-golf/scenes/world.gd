@@ -138,7 +138,7 @@ func _on_report_puck_stopped(puck):
 	score_label.text = "Score: " + str(snapped(total_score, 1)) + "pts"
 	
 	
-@export var table_border = 20
+@export var table_border = Vector2(100, 100)
 @export var element_buffer = 10
 
 func load_level(level_id):
@@ -151,10 +151,9 @@ func load_level(level_id):
 	orgainse_screen_elements()
 
 func orgainse_screen_elements():
-	var board_area = level_grid.get_used_rect()
-	var h_ui = ui_layer.info_container
-	var v_ui = inventory
-	pass
+	var board_area : Vector2 = level_grid.get_used_rect().size * level_grid.tile_set.tile_size
+	#print(board_area)
+	#DisplayServer.window_set_size(board_area + table_border)
 
 func wrap_up_level():
 	#TODO ask the level for how well it's coloured in and get a score
