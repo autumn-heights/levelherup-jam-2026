@@ -1,4 +1,5 @@
 extends RigidBody2D
+class_name Puck
 
 var current_hue = 0.0
 var hue_change_rate = 0.001

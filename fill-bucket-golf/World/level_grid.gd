@@ -14,17 +14,27 @@ var blank_coord = Vector2i(1,0)
 
 func _ready() -> void:
 	ResetWorld()
-#	To do: make this dynamic
-	var imageFilename = "res://ART/Beanz2.png"
-	var image = Image.load_from_file(imageFilename)
+	construct_scene("res://ART/Beanz2.png")
+
+# public function:
+# set the scene from the image filename (string, e.g. "res://ART/Beanz2.png")
+# returns the size of the image set (i.e. unique tiles e.g. 16 * 16, 32 * 32, etc)
+func construct_scene(fileName) -> Vector2i:
+	var image = Image.load_from_file(fileName)
 	imageToMap(image)
-	var imageTexture = ImageTexture.create_from_image(image)
+	return Vector2i(image.get_width(), image.get_height())
+
+# public function:
+# receive the puck landing event
+func puck_landed(puck: Puck):
+	pass
 
 func ResetWorld() -> void: #to do: clear regions
 	for x in tilemap_size.x:
 		for y in tilemap_size.y:
 			set_cell(Vector2i(x,y), 0, blank_coord)
-			
+	
+#To do: merge with construct		
 func imageToMap(im : Image) -> void:
 	var maxX = 16
 	var maxY = 16
@@ -50,19 +60,22 @@ func _process(_delta: float) -> void: #to do: should do nothing
 	for art in loadedWorld:
 		set_cell(art.Gridspace, 0, art.AssetCoordinate)
 
+#internal use only
 #take the list of pixels corresponding to the array and set it to a new region
 func AddRegion(regionCells: Array[Vector2i]) -> int:
 	regionCounter += 1
 	for cell in regionCells:
 		GetCell(cell.x, cell.y).Region = regionCounter
 	return regionCounter
-		
+	
+#internal use only	
 #Set the region with the id to the colour from the tile map that corresponds to the vector
 func SetRegion(regionId : int, colour: Vector2i):
 	for cell in loadedWorld:
 		if (cell.Region == regionId):
 			cell.AssetCoordinate = colour
 	
+#internal use only
 #dogshit lookup for pixel at x and y
 func GetCell(x: int, y: int) -> ArtMap:
 	for cell in loadedWorld:
