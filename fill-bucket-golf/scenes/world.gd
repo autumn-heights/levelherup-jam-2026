@@ -43,6 +43,7 @@ var pucks_in_motion = 0;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$AudioStreamPlayer2D.play()
 	level_grid.position = level_grid.tile_set.tile_size * 0.5
 	#thrower.create_puck_request.connect(create_puck)
 	thrower.shoot_puck.connect(shoot_puck)
@@ -50,7 +51,6 @@ func _ready() -> void:
 	
 	current_level = 1;
 	load_level(current_level);
-	$Borders.generate_borders(level_grid)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -120,15 +120,27 @@ func update_pucks_in_motion():
 
 func _on_report_puck_stopped(puck):
 	level_grid.puck_landed(puck)
+@export var table_border = 20
+@export var element_buffer = 10
 
 func load_level(level_id):
 	#TODO unload current level if exists
 	#TODO load level with id level_id
 	level_grid.construct_scene(filenames[level_id -1])
+	$Borders.generate_borders(level_grid)
 	pucks_in_hand = PUCK_INVENTORY_BY_LEVEL[level_id-1].size();
 	inventory.add_display_pucks(PUCK_INVENTORY_BY_LEVEL[level_id-1])
 	create_puck();
 	
+	#TODO resize screen to show board + some extra fingies
+	orgainse_screen_elements()
+
+func orgainse_screen_elements():
+	var board_area = level_grid.get_used_rect()
+	var h_ui = ui_layer.info_container
+	var v_ui = inventory
+	pass
+
 func wrap_up_level():
 	#TODO ask the level for how well it's coloured in and get a score
 	level_grid.ResetWorld(true)

@@ -5,3 +5,4 @@ extends CanvasLayer
 @onready var pucks_counter: Label = $InfoContainer/VBoxContainer/GridContainer/PucksCounter
 @onready var game_end_label = $GameEnd
 @onready var level_label: Label = $InfoContainer/VBoxContainer/LevelLabel
+@onready var info_container: PanelContainer = $InfoContainer
