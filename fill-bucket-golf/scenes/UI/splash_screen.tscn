@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d3cc7cwayqnhn" path="res://scenes/UI/splash_screen.gd" id="1_qn6m8"]
 [ext_resource type="Texture2D" uid="uid://5we87c2u6apx" path="res://icon.svg" id="2_u5mgf"]
+[ext_resource type="AudioStream" uid="uid://dltv4f4qs1fve" path="res://ART/GolfLoop1.wav" id="3_u5mgf"]
 
 [node name="SplashScreen" type="CanvasLayer" unique_id=1831439161]
 script = ExtResource("1_qn6m8")
@@ -90,3 +91,7 @@ grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Return"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="." unique_id=824973347 groups=["AUDIO_Music"]]
+stream = ExtResource("3_u5mgf")
+autoplay = true
