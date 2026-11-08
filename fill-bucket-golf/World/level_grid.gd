@@ -56,6 +56,8 @@ func puck_landed(puck: Puck) -> int:
 	var local = to_local(puck.position)
 	var map = local_to_map(local)
 	var artmap :ArtMap  = GetCell(map.x, map.y)
+	if (artmap.Region == 0):
+		return 0
 	#flip colour - bug
 	var colour = Vector2i(puck.colour_id.y, puck.colour_id.x)
 	return SetRegion(artmap.Region, colour) 
