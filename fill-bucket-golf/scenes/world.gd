@@ -4,9 +4,15 @@ var scene_puck = preload("res://scenes/puck.tscn");
 
 const PUCK_INVENTORY_BY_LEVEL = [
 	#level 1:
-	[Vector2i(0,1), Vector2i(0,2), Vector2i(0,3) ],
+	[Vector2i(0,7), Vector2i(0,2), Vector2i(0,3) ],
 	#level 2:
 	[Vector2i(0,4), Vector2i(0,5), Vector2i(0,6) ]
+]
+
+var filenames = [
+	"res://ART/Beanz2.png",
+	"res://ART/cat.png",
+	"res://ART/panda.png",
 ]
 
 var pucks_in_hand = 3;
@@ -118,13 +124,14 @@ func _on_report_puck_stopped(puck):
 func load_level(level_id):
 	#TODO unload current level if exists
 	#TODO load level with id level_id
-	level_grid.construct_scene("res://ART/Beanz2.png")
+	level_grid.construct_scene(filenames[level_id -1])
 	pucks_in_hand = PUCK_INVENTORY_BY_LEVEL[level_id-1].size();
 	inventory.add_display_pucks(PUCK_INVENTORY_BY_LEVEL[level_id-1])
 	create_puck();
 	
 func wrap_up_level():
 	#TODO ask the level for how well it's coloured in and get a score
+	level_grid.ResetWorld(true)
 	total_score += 10
 	for puck in all_pucks:
 		puck.queue_free()
