@@ -16,10 +16,8 @@ var blank_coord = Vector2i(1,0)
 
 func _ready() -> void:
 	ResetWorld()
-	construct_scene("res://ART/Beanz2.png")
+	#construct_scene("res://ART/Beanz2.png")
 	#debugRegions()
-
-
 
 # public function:
 # set the scene from the image filename (string, e.g. "res://ART/Beanz2.png")
