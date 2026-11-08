@@ -2,7 +2,6 @@ extends Node2D
 
 var scene_puck = preload("res://scenes/puck.tscn");
 
-var pucks_in_hand = 3;
 const PUCK_INVENTORY_BY_LEVEL = [
 	#level 1:
 	[Vector2i(0,1), Vector2i(0,2), Vector2i(0,3) ],
@@ -10,7 +9,7 @@ const PUCK_INVENTORY_BY_LEVEL = [
 	[Vector2i(0,4), Vector2i(0,5), Vector2i(0,6) ]
 ]
 
-const TOTAL_LEVELS = 2;
+var pucks_in_hand = 3;
 var current_level = 0;
 var total_score = 0;
 var puck_start_position = Vector2i(100,100);
@@ -20,6 +19,7 @@ var current_puck = null;
 var pucks_in_motion = 0;
 @onready var ui_layer: CanvasLayer = $UILayer
 @onready var thrower: Node2D = $Thrower
+@onready var level_grid = $LevelGrid
 
 @onready var wait_timer_label = ui_layer.wait_timer_label
 @onready var wait_timer = ui_layer.wait_timer
@@ -76,7 +76,7 @@ func shoot_puck(angle, strength):
 
 func create_puck():
 	if pucks_in_hand > 0:
-		var colour_id = PUCK_INVENTORY_BY_LEVEL[current_level][-pucks_in_hand]
+		var colour_id = PUCK_INVENTORY_BY_LEVEL[current_level-1][-pucks_in_hand]
 		pucks_in_hand -= 1;
 		current_puck = scene_puck.instantiate();
 		add_child(current_puck)
@@ -91,15 +91,15 @@ func create_puck():
 		current_puck = null;
 
 func wait_timer_timeout():
-	if current_puck == null:
+	if current_puck != null:
+		create_puck()
+	else:
 		wrap_up_level();
-		if current_level < PUCK_INVENTORY_BY_LEVEL:
+		if current_level < PUCK_INVENTORY_BY_LEVEL.size():
 			current_level += 1;
 			load_level(current_level);
 		else:
 			wrap_up_game();
-	else:
-		create_puck()
 
 func update_pucks_in_motion():
 	pucks_in_motion = 0
@@ -107,14 +107,14 @@ func update_pucks_in_motion():
 		if puck.linear_velocity.length() > 10:
 			pucks_in_motion += 1;
 
-func _on_report_puck_stopped(screen_coords):
-	print(screen_coords)
+func _on_report_puck_stopped(puck):
+	level_grid.puck_landed(puck)
 	#TODO report puck stopped at screen_coords
 
 func load_level(level_id):
 	#TODO unload current level if exists
 	#TODO load level with id level_id
-	pucks_in_hand = 3;
+	pucks_in_hand = PUCK_INVENTORY_BY_LEVEL[level_id-1].size();
 	create_puck();
 	
 func wrap_up_level():
