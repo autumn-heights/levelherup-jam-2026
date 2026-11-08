@@ -1,18 +1,26 @@
 [gd_scene format=3 uid="uid://byvra88jh0quv"]
 
 [ext_resource type="Script" uid="uid://d3cc7cwayqnhn" path="res://scenes/UI/splash_screen.gd" id="1_qn6m8"]
-[ext_resource type="Texture2D" uid="uid://5we87c2u6apx" path="res://icon.svg" id="2_u5mgf"]
+[ext_resource type="Texture2D" uid="uid://ct467fw6h3j4b" path="res://ART/cat.png" id="2_u5mgf"]
 [ext_resource type="AudioStream" uid="uid://dltv4f4qs1fve" path="res://ART/GolfLoop1.wav" id="3_u5mgf"]
+[ext_resource type="Texture2D" uid="uid://b5udjgdpsvhjg" path="res://ART/cover-image.png" id="4_xiaqw"]
 
 [node name="SplashScreen" type="CanvasLayer" unique_id=1831439161]
 script = ExtResource("1_qn6m8")
 
+[node name="CoverImage" type="Sprite2D" parent="." unique_id=1009513521]
+position = Vector2(271.5, 273.49997)
+scale = Vector2(2.0566037, 2.735)
+texture = ExtResource("4_xiaqw")
+
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1705374465]
+visible = false
 repeat_size = Vector2(200, 200)
 autoscroll = Vector2(300, 30)
-repeat_times = 11
+repeat_times = 30
 
 [node name="Parallax_sprite" type="Sprite2D" parent="Parallax2D" unique_id=1001635269]
+modulate = Color(1, 1, 1, 0.5058824)
 rotation = 0.5235988
 texture = ExtResource("2_u5mgf")
 
@@ -54,6 +62,7 @@ grow_horizontal = 0
 text = "Settings"
 
 [node name="Settings" type="Control" parent="." unique_id=440578215]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

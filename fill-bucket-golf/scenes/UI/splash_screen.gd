@@ -3,7 +3,7 @@ extends CanvasLayer
 
 var sprite_rotation_deg = 30
 var scroll_speed = 200
-var sprite_spacing = 300
+var sprite_spacing = 60
 @onready var parallax_2d: Parallax2D = $Parallax2D
 @onready var parallax_sprite: Sprite2D = $Parallax2D/Parallax_sprite
 

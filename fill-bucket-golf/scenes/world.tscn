@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dpf4n35y738ly" path="res://scenes/borders.gd" id="3_71j4m"]
 [ext_resource type="PackedScene" uid="uid://cxwry3wfpwcdb" path="res://scenes/UI/canvas_layer.tscn" id="4_k0juu"]
 [ext_resource type="AudioStream" uid="uid://dltv4f4qs1fve" path="res://ART/GolfLoop1.wav" id="8_4mrxx"]
+[ext_resource type="Texture2D" uid="uid://dmsf3u8g6ipo2" path="res://ART/mascot.png" id="9_7r4gi"]
 
 [node name="World" type="Node2D" unique_id=90205617]
 script = ExtResource("1_rwgxs")
@@ -50,3 +51,8 @@ position = Vector2(71, 529)
 stream = ExtResource("8_4mrxx")
 pitch_scale = 1.2
 autoplay = true
+
+[node name="Mascot" type="Sprite2D" parent="." unique_id=1206831945]
+position = Vector2(476, 473)
+scale = Vector2(2.2666667, 2.2666667)
+texture = ExtResource("9_7r4gi")
