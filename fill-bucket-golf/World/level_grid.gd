@@ -46,9 +46,12 @@ func construct_scene(fileName) -> Vector2i:
 # receive the puck landing event
 func puck_landed(puck: Puck):
 	#identify region
-	var cell : Vector2i = get_cell_atlas_coords(puck.position)
-	var artmap :ArtMap  = GetCell(cell.x, cell.y)
-	SetRegion(artmap.Region, Vector2i(3,0)) #to do: get the colour from the puck
+	var local = to_local(puck.position)
+	var map = local_to_map(local)
+	var artmap :ArtMap  = GetCell(map.x, map.y)
+	#flip colour - bug
+	var colour = Vector2i(puck.colour_id.y, puck.colour_id.x)
+	SetRegion(artmap.Region, colour) 
 
 func ResetWorld(clearWorld = true) -> void: 
 	clear()
