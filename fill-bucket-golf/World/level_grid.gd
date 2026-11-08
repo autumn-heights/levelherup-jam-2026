@@ -8,27 +8,67 @@ const  BOUNDARY_OFFSET = 1
 const tilemap_size = Vector2i(32,32)
 
 var loadedWorld : Array[ArtMap]
+var regionCounter = 0;
 var border_coord = Vector2i(0,0)
 var blank_coord = Vector2i(1,0)
 
 func _ready() -> void:
-	drawBoundary()
-	ImageTexture
+	ResetWorld()
+#	To do: make this dynamic
+	var imageFilename = "res://ART/Beanz2.png"
+	var image = Image.load_from_file(imageFilename)
+	imageToMap(image)
+	var imageTexture = ImageTexture.create_from_image(image)
 
-func drawBoundary() -> void:
+func ResetWorld() -> void: #to do: clear regions
 	for x in tilemap_size.x:
 		for y in tilemap_size.y:
 			set_cell(Vector2i(x,y), 0, blank_coord)
-	#for i in range(0, GRID_WIDTH_CELLS):
-		#loadedWorld.append(ArtMap.new(Vector2i(i, 0), Vector2i(0,0), true, true))
-		#loadedWorld.append(ArtMap.new(Vector2i(i, GRID_WIDTH_CELLS -1), Vector2i(0,0), true, true))
-		#loadedWorld.append(ArtMap.new(Vector2i(0, i), Vector2i(0,0), true, true))
-		#loadedWorld.append(ArtMap.new(Vector2i(GRID_WIDTH_CELLS -1, i), Vector2i(0,0), true, true))
-	#for i in range(1, GRID_WIDTH_CELLS -1):
-		#for j in range(1, GRID_WIDTH_CELLS -1):
-			#loadedWorld.append(ArtMap.new(Vector2i(i,j), Vector2i(2,0)))
-		
-func _process(_delta: float) -> void:
+			
+func imageToMap(im : Image) -> void:
+	var maxX = 16
+	var maxY = 16
+	var regionMap = {} #Dictionary["color":, Array[Vector2i]]
+	for x in range(0, maxX):
+		for y in range(0, maxY):
+			var colour :Color = im.get_pixel(x, y)
+			var colourname = "{0}, {1}, {2}".format([colour.r, colour.g, colour.b])
+			if(regionMap.keys().has(colourname)):
+				regionMap[colourname].append(Vector2i(x,y))
+			else :
+				var regionList : Array[Vector2i] = []
+				regionMap[colourname] = regionList
+				regionList.append(Vector2i(x,y))
+				
+	var debugCounter = 0; #delete later
+	for yy in regionMap.keys():
+		var p = AddRegion(regionMap[yy])
+		SetRegion(p, Vector2i(debugCounter, 0))
+		debugCounter += 1
+
+func _process(_delta: float) -> void: #to do: should do nothing
 	for art in loadedWorld:
 		set_cell(art.Gridspace, 0, art.AssetCoordinate)
+
+#take the list of pixels corresponding to the array and set it to a new region
+func AddRegion(regionCells: Array[Vector2i]) -> int:
+	regionCounter += 1
+	for cell in regionCells:
+		GetCell(cell.x, cell.y).Region = regionCounter
+	return regionCounter
+		
+#Set the region with the id to the colour from the tile map that corresponds to the vector
+func SetRegion(regionId : int, colour: Vector2i):
+	for cell in loadedWorld:
+		if (cell.Region == regionId):
+			cell.AssetCoordinate = colour
 	
+#dogshit lookup for pixel at x and y
+func GetCell(x: int, y: int) -> ArtMap:
+	for cell in loadedWorld:
+		if (cell.matches(x,y)):
+			return cell
+#	Add the cell otherwise
+	var newCell = ArtMap.new(Vector2i(x,y), Vector2i(0,0), 0)
+	loadedWorld.append(newCell)
+	return newCell
