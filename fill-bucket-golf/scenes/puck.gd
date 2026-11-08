@@ -19,7 +19,10 @@ var in_motion = false;
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	atlas_img = Image.load_from_file('res://ART/Tileatlas.png')
+	var image = load('res://ART/Tileatlas.png').get_image()
+	if image.is_compressed():
+		image.decompress()
+	atlas_img = image
 	
 
 func bumped_something(thing:Node2D):
