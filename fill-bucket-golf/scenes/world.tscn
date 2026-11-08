@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://k6ykkqevuhbd" path="res://ART/Texturelabs_Wood_266L.jpg" id="2_i7141"]
 [ext_resource type="Script" uid="uid://dpf4n35y738ly" path="res://scenes/borders.gd" id="3_71j4m"]
 [ext_resource type="PackedScene" uid="uid://cxwry3wfpwcdb" path="res://scenes/UI/canvas_layer.tscn" id="4_k0juu"]
+[ext_resource type="AudioStream" uid="uid://dltv4f4qs1fve" path="res://ART/GolfLoop1.wav" id="8_4mrxx"]
 
 [node name="World" type="Node2D" unique_id=90205617]
 script = ExtResource("1_rwgxs")
@@ -44,3 +45,8 @@ rotation = 1.5707964
 
 [node name="Inventory" parent="." unique_id=933600528 instance=ExtResource("2_71j4m")]
 position = Vector2(71, 529)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="." unique_id=1832475834]
+stream = ExtResource("8_4mrxx")
+pitch_scale = 1.2
+autoplay = true

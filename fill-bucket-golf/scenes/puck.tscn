@@ -28,7 +28,7 @@ texture = ExtResource("1_gj0yh")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=669082341]
 shape = SubResource("CircleShape2D_h7q0l")
 
-[node name="SamplePlayer" type="AudioStreamPlayer2D" parent="." unique_id=730197967]
+[node name="SamplePlayer" type="AudioStreamPlayer2D" parent="." unique_id=730197967 groups=["Audio_Effect"]]
 stream = SubResource("AudioStreamPolyphonic_drnfr")
 max_polyphony = 2
 script = ExtResource("3_ctoid")
