@@ -3,11 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://dk07oynjb2ec6" path="res://scenes/thrower.tscn" id="1_nnsk1"]
 [ext_resource type="Script" uid="uid://bjhrjeia7dlr7" path="res://scenes/world.gd" id="1_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://jfyb1eprsq0q" path="res://World/LevelGrid.tscn" id="2_4wyf3"]
-<<<<<<< Updated upstream
-=======
 [ext_resource type="Script" uid="uid://dpf4n35y738ly" path="res://scenes/borders.gd" id="3_71j4m"]
 [ext_resource type="PackedScene" uid="uid://cxwry3wfpwcdb" path="res://scenes/UI/canvas_layer.tscn" id="4_k0juu"]
->>>>>>> Stashed changes
+
+[ext_resource type="PackedScene" uid="uid://cxwry3wfpwcdb" path="res://scenes/UI/canvas_layer.tscn" id="4_k0juu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_drnfr"]
+size = Vector2(600, 100)
+
 
 [node name="World" type="Node2D" unique_id=90205617]
 script = ExtResource("1_rwgxs")
@@ -34,53 +37,6 @@ position = Vector2(291, 457)
 position = Vector2(324, 303)
 rotation = 1.5707964
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1466140396]
-
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=1195925456]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -45.0
-offset_top = -20.0
-offset_right = 45.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="GameEndLabel" type="Label" parent="CanvasLayer/CenterContainer" unique_id=486701100]
-visible = false
-layout_mode = 2
-text = "game end :)"
-
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer" unique_id=1724431493]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -96.0
-offset_bottom = 103.0
-grow_horizontal = 0
-size_flags_horizontal = 10
-size_flags_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="PucksCounter" type="Label" parent="CanvasLayer/GridContainer" unique_id=1141681282]
-layout_mode = 2
-
-[node name="WaitTimerLabel" type="Label" parent="CanvasLayer/GridContainer" unique_id=601093346]
-layout_mode = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="WaitTimer" type="Timer" parent="CanvasLayer/GridContainer/WaitTimerLabel" unique_id=1118882029]
-one_shot = true
-
-[node name="LevelLabel" type="Label" parent="CanvasLayer" unique_id=35640640]
-offset_left = 19.0
-offset_top = 508.0
-offset_right = 66.0
-offset_bottom = 535.0
-
 [node name="LevelGrid" parent="." unique_id=742980925 instance=ExtResource("2_4wyf3")]
+
+[node name="UILayer" parent="." unique_id=2034971586 instance=ExtResource("4_k0juu")]
