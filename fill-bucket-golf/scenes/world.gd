@@ -11,8 +11,8 @@ const PUCK_INVENTORY_BY_LEVEL = [
 
 var filenames = [
 	"res://ART/Beanz2.png",
-	"res://ART/cat.png",
-	"res://ART/panda.png",
+	"res://ART/cat2.png",
+	"res://ART/panda2.png",
 ]
 
 var pucks_in_hand = 3;

@@ -13,12 +13,11 @@ var loadedWorld : Array[ArtMap]
 var regionCounter = 0;
 var border_coord = Vector2i(0,0)
 var blank_coord = Vector2i(1,0)
-var skipColour = "0, 0, 0"
 
 func _ready() -> void:
 	ResetWorld()
 	#construct_scene("res://ART/cat2.png")
-	#construct_scene("res://ART/Beanz2.png")
+	#construct_scene("res://ART/Panda2.png")
 	#use timer
 	#debugRegions(true)
 	#static
