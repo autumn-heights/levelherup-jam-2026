@@ -24,3 +24,5 @@ sources/0 = SubResource("TileSetAtlasSource_7xu3b")
 [node name="LevelGrid" type="TileMapLayer" unique_id=742980925 groups=["Region"]]
 tile_set = SubResource("TileSet_v04oy")
 script = ExtResource("1_2non0")
+
+[node name="TestTimer" type="Timer" parent="." unique_id=1584668913]
