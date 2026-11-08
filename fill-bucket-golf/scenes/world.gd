@@ -6,8 +6,7 @@ const PUCK_INVENTORY_BY_LEVEL = [
 	#level 1:
 	[ Vector2i(0,7), Vector2i(0,2), Vector2i(0,3),
 	  Vector2i(0,7), Vector2i(0,2), Vector2i(0,3),
-	  Vector2i(0,7), Vector2i(0,2), Vector2i(0,3),
-	  ],
+	  Vector2i(0,7), Vector2i(0,2), Vector2i(0,3) ],
 	#level 2:
 	[
 	  Vector2i(0,7), Vector2i(0,2), Vector2i(0,3),
@@ -15,7 +14,11 @@ const PUCK_INVENTORY_BY_LEVEL = [
 	  Vector2i(0,7), Vector2i(0,2), Vector2i(0,3),
 	  Vector2i(0,4), Vector2i(0,5), Vector2i(0,6),
 	  Vector2i(0,7), Vector2i(0,2), Vector2i(0,3),
-	  Vector2i(0,4), Vector2i(0,5), Vector2i(0,6) ]
+	  Vector2i(0,4), Vector2i(0,5), Vector2i(0,6) ],
+	# level 3:
+	[ Vector2i(0,7), Vector2i(0,6), Vector2i(0,5),
+	  Vector2i(0,4), Vector2i(0,3), Vector2i(0,2),
+	  Vector2i(0,1), Vector2i(0,7), Vector2i(0,3) ]
 ]
 
 var filenames = [
@@ -43,6 +46,7 @@ var pucks_in_motion = 0;
 @onready var pucks_counter = ui_layer.pucks_counter
 @onready var game_end_label = ui_layer.game_end_label
 @onready var level_label = ui_layer.level_label
+@onready var score_label = ui_layer.score_label
 
 
 @export_category("Timings")
@@ -129,22 +133,21 @@ func update_pucks_in_motion():
 			pucks_in_motion += 1;
 
 func _on_report_puck_stopped(puck):
-	var new_score = 10;
-	level_grid.puck_landed(puck)
+	var new_score = level_grid.puck_landed(puck)
 	total_score += new_score
+	score_label.text = "Score: " + str(snapped(total_score, 1)) + "pts"
+	
+	
 @export var table_border = 20
 @export var element_buffer = 10
 
 func load_level(level_id):
-	#TODO unload current level if exists
-	#TODO load level with id level_id
 	level_grid.construct_scene(filenames[level_id -1])
 	$Borders.generate_borders(level_grid)
 	pucks_in_hand = PUCK_INVENTORY_BY_LEVEL[level_id-1].size();
 	inventory.add_display_pucks(PUCK_INVENTORY_BY_LEVEL[level_id-1])
 	create_puck();
 	
-	#TODO resize screen to show board + some extra fingies
 	orgainse_screen_elements()
 
 func orgainse_screen_elements():
@@ -164,5 +167,6 @@ func wrap_up_level():
 func wrap_up_game():
 	$LevelGrid.hide();
 	game_end_label.show();
-	game_end_label.text += "\n Your score: " + str(total_score)
+	# figure out how to display score
+	#game_end_label.text += "\n Your score: " + str(total_score)
 	
