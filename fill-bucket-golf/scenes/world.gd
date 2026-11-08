@@ -20,6 +20,7 @@ var pucks_in_motion = 0;
 @onready var ui_layer: CanvasLayer = $UILayer
 @onready var thrower: Node2D = $Thrower
 @onready var level_grid = $LevelGrid
+@onready var inventory = $Inventory
 
 @onready var wait_timer_label = ui_layer.wait_timer_label
 @onready var wait_timer = ui_layer.wait_timer
@@ -109,12 +110,12 @@ func update_pucks_in_motion():
 
 func _on_report_puck_stopped(puck):
 	level_grid.puck_landed(puck)
-	#TODO report puck stopped at screen_coords
 
 func load_level(level_id):
 	#TODO unload current level if exists
 	#TODO load level with id level_id
 	pucks_in_hand = PUCK_INVENTORY_BY_LEVEL[level_id-1].size();
+	inventory.add_display_pucks(PUCK_INVENTORY_BY_LEVEL[level_id-1])
 	create_puck();
 	
 func wrap_up_level():
