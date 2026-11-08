@@ -6,7 +6,7 @@ var hue_change_rate = 0.001
 
 @export_category("Physics")
 @export var motion_velocity_threshold = 10;
-
+@onready var sample_player = $SamplePlayer
 signal report_puck_stopped(screen_coords)
 
 # call me ring camera because motion detected
@@ -16,6 +16,9 @@ var in_motion = false;
 func _ready() -> void:
 	pass # Replace with function body.
 
+func bumped_something(thing:Node2D):
+	for group in thing.get_groups():
+		sample_player.play_sample(group)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
