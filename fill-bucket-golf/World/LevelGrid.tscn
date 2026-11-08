@@ -1,26 +1,92 @@
 [gd_scene format=3 uid="uid://jfyb1eprsq0q"]
 
-[ext_resource type="Script" uid="uid://das4uvtniv4dm" path="res://World/level_grid.gd" id="1_2non0"]
-[ext_resource type="Texture2D" uid="uid://do0kb4vyn8ixi" path="res://ART/Tileatlas.png" id="1_rmv7p"]
+[ext_resource type="Script" uid="uid://d3cc7cwayqnhn" path="res://scenes/UI/splash_screen.gd" id="1_rmv7p"]
+[ext_resource type="Texture2D" uid="uid://5we87c2u6apx" path="res://icon.svg" id="2_7xu3b"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7xu3b"]
-texture = ExtResource("1_rmv7p")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-4:0/0 = 0
-5:0/0 = 0
-6:0/0 = 0
-7:0/0 = 0
-8:0/0 = 0
+[node name="SplashScreen" type="CanvasLayer" unique_id=1831439161]
+script = ExtResource("1_rmv7p")
 
-[sub_resource type="TileSet" id="TileSet_v04oy"]
-tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_7xu3b")
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1705374465]
+repeat_size = Vector2(200, 200)
+autoscroll = Vector2(300, 30)
+repeat_times = 11
 
-[node name="LevelGrid" type="TileMapLayer" unique_id=742980925]
-tile_set = SubResource("TileSet_v04oy")
-script = ExtResource("1_2non0")
+[node name="Parallax_sprite" type="Sprite2D" parent="Parallax2D" unique_id=1001635269]
+rotation = 0.5235988
+texture = ExtResource("2_7xu3b")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1805151199]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -23.5
+offset_right = 20.0
+offset_bottom = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=663306126]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1641288805]
+layout_mode = 2
+text = "Fixel Puckers"
+
+[node name="StartButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=651520526 groups=["Button"]]
+layout_mode = 2
+text = "Start Game"
+
+[node name="ExitButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1908555926 groups=["Button"]]
+layout_mode = 2
+text = "Exit"
+
+[node name="OpenSettings" type="Button" parent="." unique_id=1898372604 groups=["Button"]]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -70.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "Settings"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1592600503]
+
+[node name="Settings" type="Control" parent="." unique_id=440578215]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="Settings" unique_id=228737762]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Settings/PanelContainer2" unique_id=1222958989]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Jokes on us... nothings here yet...?"
+horizontal_alignment = 1
+
+[node name="CloseSettings" type="Button" parent="Settings" unique_id=19147665 groups=["Button"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Return"

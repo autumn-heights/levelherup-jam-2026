@@ -1,87 +1,92 @@
 [gd_scene format=3 uid="uid://bqs5skvx6urnw"]
 
-[ext_resource type="PackedScene" uid="uid://dk07oynjb2ec6" path="res://scenes/thrower.tscn" id="1_nnsk1"]
-[ext_resource type="Script" uid="uid://bjhrjeia7dlr7" path="res://scenes/world.gd" id="1_rwgxs"]
-[ext_resource type="PackedScene" uid="uid://jfyb1eprsq0q" path="res://World/LevelGrid.tscn" id="2_4wyf3"]
+[ext_resource type="Script" uid="uid://d3cc7cwayqnhn" path="res://scenes/UI/splash_screen.gd" id="1_rwgxs"]
+[ext_resource type="Texture2D" uid="uid://5we87c2u6apx" path="res://icon.svg" id="2_4wyf3"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_drnfr"]
-size = Vector2(600, 100)
-
-[node name="World" type="Node2D" unique_id=90205617]
+[node name="SplashScreen" type="CanvasLayer" unique_id=1831439161]
 script = ExtResource("1_rwgxs")
 
-[node name="Thrower" parent="." unique_id=4659465 instance=ExtResource("1_nnsk1")]
-position = Vector2(20, 321)
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1705374465]
+repeat_size = Vector2(200, 200)
+autoscroll = Vector2(300, 30)
+repeat_times = 11
 
-[node name="Borders" type="Node2D" parent="." unique_id=2140081404]
+[node name="Parallax_sprite" type="Sprite2D" parent="Parallax2D" unique_id=1001635269]
+rotation = 0.5235988
+texture = ExtResource("2_4wyf3")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Borders" unique_id=775871465]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/StaticBody2D" unique_id=1764842078]
-position = Vector2(290, -50)
-shape = SubResource("RectangleShape2D_drnfr")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Borders/StaticBody2D" unique_id=1395566609]
-position = Vector2(-50, 290)
-rotation = 1.5707964
-shape = SubResource("RectangleShape2D_drnfr")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Borders/StaticBody2D" unique_id=1820780870]
-position = Vector2(290, 594)
-shape = SubResource("RectangleShape2D_drnfr")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Borders/StaticBody2D" unique_id=167827431]
-position = Vector2(594, 280)
-rotation = 1.5707964
-shape = SubResource("RectangleShape2D_drnfr")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1466140396]
-
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=1195925456]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1805151199]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -45.0
-offset_top = -20.0
-offset_right = 45.0
-offset_bottom = 20.0
+offset_left = -20.0
+offset_top = -23.5
+offset_right = 20.0
+offset_bottom = 23.5
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
-[node name="GameEndLabel" type="Label" parent="CanvasLayer/CenterContainer" unique_id=486701100]
-visible = false
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=663306126]
 layout_mode = 2
-text = "game end :)"
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer" unique_id=1724431493]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1641288805]
+layout_mode = 2
+text = "Fixel Puckers"
+
+[node name="StartButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=651520526 groups=["Button"]]
+layout_mode = 2
+text = "Start Game"
+
+[node name="ExitButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1908555926 groups=["Button"]]
+layout_mode = 2
+text = "Exit"
+
+[node name="OpenSettings" type="Button" parent="." unique_id=1898372604 groups=["Button"]]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -96.0
-offset_bottom = 103.0
+offset_left = -70.0
+offset_bottom = 31.0
 grow_horizontal = 0
-size_flags_horizontal = 10
-size_flags_vertical = 2
-metadata/_edit_use_anchors_ = true
+text = "Settings"
 
-[node name="PucksCounter" type="Label" parent="CanvasLayer/GridContainer" unique_id=1141681282]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1592600503]
+
+[node name="Settings" type="Control" parent="." unique_id=440578215]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="Settings" unique_id=228737762]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Settings/PanelContainer2" unique_id=1222958989]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Jokes on us... nothings here yet...?"
+horizontal_alignment = 1
 
-[node name="WaitTimerLabel" type="Label" parent="CanvasLayer/GridContainer" unique_id=601093346]
-layout_mode = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="WaitTimer" type="Timer" parent="CanvasLayer/GridContainer/WaitTimerLabel" unique_id=1118882029]
-one_shot = true
-
-[node name="LevelLabel" type="Label" parent="CanvasLayer" unique_id=35640640]
-offset_left = 19.0
-offset_top = 508.0
-offset_right = 66.0
-offset_bottom = 535.0
-
-[node name="LevelGrid" parent="." unique_id=742980925 instance=ExtResource("2_4wyf3")]
+[node name="CloseSettings" type="Button" parent="Settings" unique_id=19147665 groups=["Button"]]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Return"
