@@ -4,9 +4,18 @@ var scene_puck = preload("res://scenes/puck.tscn");
 
 const PUCK_INVENTORY_BY_LEVEL = [
 	#level 1:
-	[Vector2i(0,7), Vector2i(0,2), Vector2i(0,3) ],
+	[ Vector2i(0,7), Vector2i(0,2), Vector2i(0,3),
+	  Vector2i(0,7), Vector2i(0,2), Vector2i(0,3),
+	  Vector2i(0,7), Vector2i(0,2), Vector2i(0,3),
+	  ],
 	#level 2:
-	[Vector2i(0,4), Vector2i(0,5), Vector2i(0,6) ]
+	[
+	  Vector2i(0,7), Vector2i(0,2), Vector2i(0,3),
+	  Vector2i(0,4), Vector2i(0,5), Vector2i(0,6),
+	  Vector2i(0,7), Vector2i(0,2), Vector2i(0,3),
+	  Vector2i(0,4), Vector2i(0,5), Vector2i(0,6),
+	  Vector2i(0,7), Vector2i(0,2), Vector2i(0,3),
+	  Vector2i(0,4), Vector2i(0,5), Vector2i(0,6) ]
 ]
 
 var filenames = [
@@ -98,6 +107,7 @@ func create_puck():
 		thrower.ready_up()
 		all_pucks.append(current_puck);
 		thrower.position = current_puck.position;
+		inventory.remove_display_puck();
 	else:
 		current_puck = null;
 
@@ -119,7 +129,9 @@ func update_pucks_in_motion():
 			pucks_in_motion += 1;
 
 func _on_report_puck_stopped(puck):
+	var new_score = 10;
 	level_grid.puck_landed(puck)
+	total_score += new_score
 
 func load_level(level_id):
 	#TODO unload current level if exists
@@ -132,7 +144,6 @@ func load_level(level_id):
 func wrap_up_level():
 	#TODO ask the level for how well it's coloured in and get a score
 	level_grid.ResetWorld(true)
-	total_score += 10
 	for puck in all_pucks:
 		puck.queue_free()
 	all_pucks = []
@@ -141,4 +152,5 @@ func wrap_up_level():
 func wrap_up_game():
 	$LevelGrid.hide();
 	game_end_label.show();
+	game_end_label.text += "\n Your score: " + str(total_score)
 	

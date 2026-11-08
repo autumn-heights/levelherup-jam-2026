@@ -9,7 +9,7 @@ size = Vector2(242, 20)
 font_size = 8
 font_color = Color(0.34800005, 0.3522001, 0.6, 1)
 
-[node name="Node2D" type="Node2D" unique_id=933600528]
+[node name="Inventory" type="Node2D" unique_id=933600528]
 script = ExtResource("1_3n7vm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=730125927]
