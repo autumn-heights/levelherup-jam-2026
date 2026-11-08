@@ -21,7 +21,6 @@ var pucks_in_motion = 0;
 @onready var level_grid = $LevelGrid
 @onready var ui_layer: CanvasLayer = $UILayer
 @onready var thrower: Node2D = $Thrower
-@onready var level_grid = $LevelGrid
 @onready var inventory = $Inventory
 
 @onready var wait_timer_label = ui_layer.wait_timer_label
